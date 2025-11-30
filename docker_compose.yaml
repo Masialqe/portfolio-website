@@ -1,0 +1,35 @@
+version: '3.8'
+services: 
+  # Database Service
+  pa-database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - pa_data:/var/lib/postgresql/data
+    networks:
+      - pa_network
+    ports:
+      - "5432:5432"
+
+  # Database Web Interface Service (development only)
+  pa-database-web:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    networks:
+      - pa_network
+    depends_on:
+      - pa-database
+
+networks:
+  pa_network:
+    driver: bridge
+
+volumes:
+  pa_data:

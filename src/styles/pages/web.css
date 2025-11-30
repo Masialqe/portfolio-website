@@ -1,0 +1,24 @@
+.web-container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    min-height: 100vh;
+}
+
+header{
+    flex: 1;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+main{
+    flex: 8;
+}
+
+footer{
+    flex: 1;
+}
